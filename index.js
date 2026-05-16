@@ -43,7 +43,7 @@ const providerSchema = new mongoose.Schema({
         type: String,
         required: true,
     },
-    skillCategory: {
+    skillCategory: {    
         type: String,
     },
     gender: {
@@ -107,8 +107,10 @@ app.use((err, req, res) => {
     res.status(500).json({ message: "something went wrong on the server" });
 });
 
-// Start the server after connecting to the database
-app.listen(port, () => {
-    console.log(`GigFlow API is running on port ${port}`);
+// connect to the database and start the server
+connectDB().then(() => {
+    app.listen(port, () => {
+        console.log(`GigFlow API is running on port ${port}`);
+    });
 });
  
